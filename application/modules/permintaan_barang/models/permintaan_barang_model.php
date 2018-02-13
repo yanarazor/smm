@@ -124,9 +124,7 @@ class Permintaan_barang_model extends BF_Model {
 		} 
 		if($tahun != ""){
 			$this->db->where('tanggal_permintaan like "'.$tahun.'-%"');
-		}else{
-			$this->db->where('tanggal_permintaan like "'.date("Y").'-%"');
-		}
+		} 
 		if($status != ""){
 			$this->db->where('status_permintaan',$status);
 		} 
@@ -154,9 +152,7 @@ class Permintaan_barang_model extends BF_Model {
 		} 
 		if($tahun != ""){
 			$this->db->where('tanggal_permintaan like "'.$tahun.'-%"');
-		}else{
-			$this->db->where('tanggal_permintaan like "'.date("Y").'-%"');
-		}
+		} 
 		if($status != ""){
 			$this->db->where('status_permintaan',$status);
 		} 

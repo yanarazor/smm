@@ -194,6 +194,8 @@ class Settings extends Admin_Controller
 			array('name' => 'site.usersimpeg', 'value' => $this->input->post('usersimpeg')),
 			array('name' => 'site.passsimpeg', 'value' => $this->input->post('passsimpeg')),
 			array('name' => 'site.tokensimpeg', 'value' => $this->input->post('tokensimpeg')),
+			array('name' => 'site.bendahara', 'value' => $this->input->post('bendahara')),
+			
 		);
 
 		//destroy the saved update message in case they changed update preferences.

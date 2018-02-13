@@ -170,14 +170,14 @@ $id = isset($sppd['id']) ? $sppd['id'] : '';
 			<div class="control-group <?php echo form_error('tanggal_berangkat') ? 'error' : ''; ?>">
 				<?php echo form_label('Tanggal Berangkat', 'sppd_tanggal_berangkat', array('class' => 'control-label') ); ?>
 				<div class='controls'>
-					<input id='sppd_tanggal_berangkat'  type='text' name='sppd_tanggal_berangkat'  value="<?php echo set_value('sppd_tanggal_berangkat', isset($sppd['tanggal_berangkat']) ? $sppd['tanggal_berangkat'] : ''); ?>" />
+					<input id='sppd_tanggal_berangkat' class="datepicker" type='text' name='sppd_tanggal_berangkat'  value="<?php echo set_value('sppd_tanggal_berangkat', isset($sppd['tanggal_berangkat']) ? $sppd['tanggal_berangkat'] : ''); ?>" />
 					<span class='help-inline'><?php echo form_error('tanggal_berangkat'); ?></span>
 				</div>
 			</div>
 			<div class="control-group <?php echo form_error('tanggal_kembali') ? 'error' : ''; ?>">
 				<?php echo form_label('Tanggal Kembali', 'tanggal_kembali', array('class' => 'control-label') ); ?>
 				<div class='controls'>
-					<input id='tanggal_kembali'  type='text' name='tanggal_kembali'  value="<?php echo set_value('tanggal_kembali', isset($sppd['tanggal_kembali']) ? $sppd['tanggal_kembali'] : ''); ?>" />
+					<input id='tanggal_kembali'  type='text' class="datepicker"  name='tanggal_kembali'  value="<?php echo set_value('tanggal_kembali', isset($sppd['tanggal_kembali']) ? $sppd['tanggal_kembali'] : ''); ?>" />
 					<span class='help-inline'><?php echo form_error('tanggal_kembali'); ?></span>
 				</div>
 			</div>

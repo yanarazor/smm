@@ -331,7 +331,7 @@ class kepegawaian extends Admin_Controller
 				// Log the activity
 				log_activity($this->current_user->id, 'Verifikasi Sppd sukses: '. $id .' : '. $this->input->ip_address(), 'Sppd');
 				Template::set_message("Sukses Verifikasi data", 'success');
-				redirect(SITE_AREA .'/kepegawaian/sppd/listsppd');
+				redirect(SITE_AREA .'/kepegawaian/sppd/periksa/'.$id);
 			}
 			else
 			{
@@ -624,13 +624,84 @@ class kepegawaian extends Admin_Controller
 		$data['provinsi']        = $this->input->post('provinsi');
 		$data['lama']        = $this->input->post('lama');
 		
+
 		if($this->input->post('status_atasan')!="")
 			$data['status_atasan']        = $this->input->post('status_atasan');
 		if($this->input->post('alasan_ditolak')!="")
 			$data['alasan_ditolak']       = $this->input->post('alasan_ditolak');
 		if($this->input->post('status_pj')!="")
 			$data['status_pj']       = $this->input->post('status_pj');
+
+
+		if($this->input->post('real_transport')!="")
+			$data['real_transport']       = $this->input->post('real_transport');
+		if($this->input->post('ket_real_transport')!="")
+			$data['ket_real_transport']       = $this->input->post('ket_real_transport');
+		if($this->input->post('real_penginapan')!="")
+			$data['real_penginapan']       = $this->input->post('real_penginapan');
+		if($this->input->post('ket_real_penginapan')!="")
+			$data['ket_real_penginapan']       = $this->input->post('ket_real_penginapan');
+		if($this->input->post('status_spj')!="")
+			$data['status_spj']       = $this->input->post('status_spj');
+
+		if($this->input->post('tgl_sp2d')!="")
+			$data['tgl_sp2d']       = $this->input->post('tgl_sp2d');
+		
+
+		//	if($this->input->post('transport_jml')!="")
+				$data['transport_jml']	= $this->input->post('transport_jml');	
+		//	if($this->input->post('transport_satu')!="")
+				$data['transport_satu']       = $this->input->post('transport_satu');	
+				
+		//	if($this->input->post('transport')!="")
+				$data['transport']       		= $this->input->post('transport');	
+		//	if($this->input->post('ket_transport')!="")
+				$data['ket_transport']       		= $this->input->post('ket_transport');	
 			
+	//		if($this->input->post('harian_jml')!="")
+				$data['harian_jml']	= $this->input->post('harian_jml');	
+	//		if($this->input->post('harian_satu')!="")
+				$data['harian_satu']       = $this->input->post('harian_satu');	
+				
+	//		if($this->input->post('uang_harian')!="")
+				$data['uang_harian']       		= $this->input->post('uang_harian');	
+	//		if($this->input->post('ket_uang_harian')!="")
+				$data['ket_uang_harian']       		= $this->input->post('ket_uang_harian');	
+			
+	//		if($this->input->post('penginapan_jml')!="")
+				$data['penginapan_jml']	= $this->input->post('penginapan_jml');	
+	//		if($this->input->post('penginapan_satu')!="")
+				$data['penginapan_satu']       = $this->input->post('penginapan_satu') != "" ? $this->input->post('penginapan_satu') : 0;		
+				
+	//		if($this->input->post('biaya_penginapan')!="")
+				$data['biaya_penginapan']       		= $this->input->post('biaya_penginapan') != "" ? $this->input->post('biaya_penginapan') : 0;		
+	//		if($this->input->post('ket_biaya_penginapan')!="")
+				$data['ket_biaya_penginapan']       		= $this->input->post('ket_biaya_penginapan');	
+			
+	//		if($this->input->post('representasi_jml')!="")
+				$data['representasi_jml']	= $this->input->post('representasi_jml');	
+	//		if($this->input->post('representasi_satu')!="")
+				$data['representasi_satu']       = $this->input->post('representasi_satu') != "" ? $this->input->post('representasi_satu') : 0;		
+				
+	//		if($this->input->post('representasi')!="")
+				$data['representasi']       		= $this->input->post('representasi') != "" ? $this->input->post('representasi') : 0;		
+	//		if($this->input->post('ket_representasi')!="")
+				$data['ket_representasi']       		= $this->input->post('ket_representasi');	
+	//		if($this->input->post('lain_lain')!="")
+				$data['lain_lain']       		= $this->input->post('lain_lain') != "" ? $this->input->post('lain_lain') : 0;	
+	//		if($this->input->post('ket_lain_lain')!="")
+				$data['ket_lain_lain']       		= $this->input->post('ket_lain_lain');	
+				
+				
+	//		if($this->input->post('real_transport')!="")
+				$data['real_transport']       		= $this->input->post('real_transport') != "" ? $this->input->post('real_transport') : 0;	
+	//		if($this->input->post('ket_real_transport')!="")
+				$data['ket_real_transport']       		= $this->input->post('ket_real_transport');	
+	//		if($this->input->post('real_penginapan')!="")
+				$data['real_penginapan']       		= $this->input->post('real_penginapan') != "" ? $this->input->post('real_penginapan') : 0;	
+			//if($this->input->post('ket_real_penginapan')!="")
+				$data['ket_real_penginapan']       		= $this->input->post('ket_real_penginapan');	
+
 		if ($type == 'insert')
 		{
 			$id = $this->Sppd_model->insert($data);
@@ -651,7 +722,33 @@ class kepegawaian extends Admin_Controller
 
 		return $return;
 	}
-	
+	public function printkuitansi()
+	{
+		$id = $this->uri->segment(5);
+		if (empty($id))
+		{
+			Template::set_message(lang('sppd_jabodetabek_invalid_id'), 'error');
+			redirect(SITE_AREA .'/kepegawaian/sppd');
+		}
+		 
+		$datadetil = $this->Sppd_model->find_detilspd($id);
+		 
+		// PPK
+		$ppk = isset($datadetil->pejabat) ? $datadetil->pejabat : "";
+		$ppks = $this->pejabat_pemberi_perintah_model->find($ppk);
+		Template::set('ppks', $ppks);
+		
+		$this->load->model('pegawai/pegawai_model', null, true);
+		$bendaharas = $this->pegawai_model->find_by("no_absen",$this->settings_lib->item('site.bendahara'));
+		Template::set('bendaharas', $bendaharas);
+		
+		Template::set('id', $id);
+		Template::set('sppd', $datadetil);
+		Template::set('toolbar_title',' Print Kuitansi SPD');
+		Template::set_theme('print');
+		
+		Template::render();
+	}
 
 	//--------------------------------------------------------------------
 

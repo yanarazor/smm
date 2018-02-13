@@ -166,6 +166,19 @@ endif;
 							</div>
 						</div>
 						<div class="control-group">
+							<label class="control-label" for="title">Bendahara Pengeluaran</label>
+							<div class="controls">
+								<select name="bendahara" id="bendahara" class="chosen-select-deselect span4">
+									<option value="">-- Silahkan Pilih  --</option>
+									<?php if (isset($users) && is_array($users) && count($users)):?>
+									<?php foreach($users as $rec):?>
+										<option value="<?php echo $rec->id?>" <?php if(isset($settings['site.bendahara']))  echo  ($rec->id==$settings['site.bendahara']) ? "selected" : ""; ?>> <?php e(ucfirst($rec->display_name)); ?></option>
+										<?php endforeach;?>
+									<?php endif;?>
+								</select>
+							</div>
+						</div>
+						<div class="control-group">
 							<label class="control-label" for="title">Max Jam Masuk Kerja</label>
 							<div class="controls">
 								<input type="text" name="maxmasuk" id="maxmasuk"  class="timeformat span2" value="<?php echo set_value('site.maxmasuk', isset($settings['site.maxmasuk']) ? $settings['site.maxmasuk'] : '') ?>" />

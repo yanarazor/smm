@@ -92,23 +92,23 @@ $id = isset($sppd['id']) ? $sppd['id'] : '';
 				<?php echo form_label('Anggaran', 'sppd_anggaran', array('class' => 'control-label') ); ?>
 				<div class='controls' aria-labelled-by='surat_izin_status_atasan_label'>
 					<label class='radio' for='sppd_anggaran_option1'>
-						<input id='sppd_anggaran_option1' name='sppd_anggaran' type='radio' class='' value='Tematik' <?php if(isset($sppd['anggaran']) and $sppd['anggaran']=="Tematik") echo "checked"; ?> />
+						<input id='sppd_anggaran_option1' name='sppd_anggaran' type='radio' onclick="changeanggaran(this);" class='' value='Tematik' <?php if(isset($sppd['anggaran']) and $sppd['anggaran']=="Tematik") echo "checked"; ?> />
 						Tematik
 						
 					</label>
 					<br>
 					<label class='radio' for='sppd_anggaran_option2'>
-						<input id='sppd_anggaran_option2' name='sppd_anggaran' type='radio' class='' value='PNBP' <?php if(isset($sppd['anggaran']) and $sppd['anggaran']=="PNBP") echo "checked"; ?> />
+						<input id='sppd_anggaran_option2' name='sppd_anggaran' type='radio' onclick="changeanggaran(this);" class='' value='PNBP' <?php if(isset($sppd['anggaran']) and $sppd['anggaran']=="PNBP") echo "checked"; ?> />
 						PNBP
 					</label>
 					<br>
 					<label class='radio' for='sppd_anggaran_option3'>
-						<input id='sppd_anggaran_option3' name='sppd_anggaran' type='radio' class='' value='Rutin' <?php if(isset($sppd['anggaran']) and $sppd['anggaran']=="Rutin") echo "checked"; ?> />
+						<input id='sppd_anggaran_option3' name='sppd_anggaran' type='radio' onclick="changeanggaran(this);" class='' value='Rutin' <?php if(isset($sppd['anggaran']) and $sppd['anggaran']=="Rutin") echo "checked"; ?> />
 						Rutin
 					</label>
 					<br>
 					<label class='radio' for='sppd_anggaran_option4'>
-						<input id='sppd_anggaran_option4' name='sppd_anggaran' type='radio' class='' value='Instansi Lain' <?php if(isset($sppd['anggaran']) and $sppd['anggaran']=="Instansi Lain") echo "checked"; ?> />
+						<input id='sppd_anggaran_option4' name='sppd_anggaran' type='radio' onclick="changeanggaran(this);" class='' value='Instansi Lain' <?php if(isset($sppd['anggaran']) and $sppd['anggaran']=="Instansi Lain") echo "checked"; ?> />
 						Instansi Lain
 					</label>
 					<span class='help-inline'><?php echo form_error('angkutan'); ?></span>
@@ -118,7 +118,7 @@ $id = isset($sppd['id']) ? $sppd['id'] : '';
 			<div class="control-group <?php echo form_error('sppd_no_keg') ? 'error' : ''; ?>">
 				<?php echo form_label('Kegiatan'. lang('bf_form_label_required'), 'sppd_pejabat', array('class' => 'control-label') ); ?>
 				<div class='controls'>
-					<select name="sppd_no_keg" id="sppd_no_keg" class="chosen-select-deselect" style="width:700px">
+					<select name="sppd_no_keg" id="idsppd_no_keg" style="width:700px">
 						<option value="">-- Pilih  --</option>
 						<?php if (isset($kegiatans) && is_array($kegiatans) && count($kegiatans)):?>
 						<?php foreach($kegiatans as $rec):?>
@@ -486,6 +486,7 @@ $id = isset($sppd['id']) ? $sppd['id'] : '';
 		</fieldset>
     <?php echo form_close(); ?>
 </div>
+
 <link href="<?php echo base_url(); ?>assets/css/chosen/chosen.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' type='text/javascript' src='<?php echo base_url(); ?>assets/js/chosen/chosen.jquery.js'></script>
 <script type="text/javascript">
@@ -520,6 +521,28 @@ $id = isset($sppd['id']) ? $sppd['id'] : '';
 		  } 
 	  });        
   } 
+
+  function changeanggaran(anggaran) {
+		var currentValue = anggaran.value;
+		 
+		$("#idsppd_no_keg").empty().append("<option>loading...</option>");
+		 var json_url = "<?php echo base_url(); ?>admin/masters/kegiatan/getkegiatan?kegiatan=" + encodeURIComponent(currentValue);
+		 $.getJSON(json_url,function(data){
+			 $("#idsppd_no_keg").empty(); 
+			 if(data==""){
+				 $("#idsppd_no_keg").append("<option value=\"\">-- Pilih --</option>");
+			 }
+			 else{
+			 	
+				 $("#idsppd_no_keg").append("<option value=\"\">-- Pilih --</option>");
+				 for(i=0; i<data.id.length; i++){
+					 $("#idsppd_no_keg").append("<option value=\"" + data.id[i]  + "\">" + data.judul[i] +"</option>");
+				 }
+			 }
+		 
+		 });
+		 return false;
+	}
 
 </script>
 <script type="text/javascript">	  

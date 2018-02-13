@@ -1,5 +1,6 @@
 $('#sppd_tanggal_berangkat').datepicker({ dateFormat: 'yy-mm-dd'});
 $('#tanggal_kembali').datepicker({ dateFormat: 'yy-mm-dd'});
+$('#tgl_sp2d').datepicker({ dateFormat: 'yy-mm-dd'});
 
 $('#tiba_tanggal_II').datepicker({ dateFormat: 'yy-mm-dd'});
 $('#tiba_tanggal_III').datepicker({ dateFormat: 'yy-mm-dd'});

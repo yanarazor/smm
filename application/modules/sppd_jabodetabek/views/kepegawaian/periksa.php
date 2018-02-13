@@ -226,6 +226,7 @@ $id = isset($sppd_jabodetabek['id']) ? $sppd_jabodetabek['id'] : '';
 						<span class='help-inline'><?php echo form_error('alasan_ditolak'); ?></span>
 					</div>
 				</div>
+			
 			<div class="form-actions">
 				<input type="submit" name="save" class="btn btn-primary" value="Save"  />
 				<?php echo lang('bf_or'); ?>

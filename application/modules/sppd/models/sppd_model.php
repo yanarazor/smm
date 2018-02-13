@@ -204,7 +204,7 @@ class Sppd_model extends BF_Model {
 	{
 		if (empty($this->selects))
 		{
-			$this->select($this->table_name .'.*,users.id_bidang as bidang,pejabat_pemberi_perintah.nama as namapemberi,
+			$this->select($this->table_name .'.*,users.id_bidang as bidang,pejabat_pemberi_perintah.nama as namapemberi,prov,
 			kegiatan.judul as judul_kegiatan,kegiatan.pj as pj,
 			pejabat_pemberi_perintah.nip as ppk,users.email as emailuser,
 			nama_pejabat,pejabat_pemberi_perintah.nip as nippejabat,pegawai.nama as namapegawai,pegawai.nip as nippegawai,
@@ -218,6 +218,7 @@ class Sppd_model extends BF_Model {
 		$this->db->join('jabatan', 'jabatan.id = pegawai.jabatan', 'left'); 
 		$this->db->join('bidang', 'bidang.id = users.id_bidang', 'left'); 
 		$this->db->join('kegiatan', 'kegiatan.kode = sppd.no_keg', 'left'); 
+		$this->db->join('propinsi', 'propinsi.id = sppd.provinsi', 'left'); 
 		$this->db->order_by("kegiatan.id","desc");
 		return parent::find($id);
 
