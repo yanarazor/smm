@@ -195,6 +195,13 @@ class Settings extends Admin_Controller
 			array('name' => 'site.passsimpeg', 'value' => $this->input->post('passsimpeg')),
 			array('name' => 'site.tokensimpeg', 'value' => $this->input->post('tokensimpeg')),
 			array('name' => 'site.bendahara', 'value' => $this->input->post('bendahara')),
+			array('name' => 'site.kodesatker', 'value' => $this->input->post('kodesatker')),
+
+			array('name' => 'site.sashost', 'value' => $this->input->post('sashost')),
+			array('name' => 'site.sasusername', 'value' => $this->input->post('sasusername')),
+			array('name' => 'site.saspassword', 'value' => $this->input->post('saspassword')),
+			array('name' => 'site.sasdatabase', 'value' => $this->input->post('sasdatabase')),
+			array('name' => 'site.sasport', 'value' => $this->input->post('sasport')),
 			
 		);
 

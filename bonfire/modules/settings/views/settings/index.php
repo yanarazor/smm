@@ -112,6 +112,9 @@ endif;
 								<p class="help-inline">http://..</p>
 							</div>
 						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Setting Permintaan Barang</legend>
 						<div class="control-group">
 							<label class="control-label" for="title">Kode Kasubid</label>
 							<div class="controls">
@@ -178,6 +181,9 @@ endif;
 								</select>
 							</div>
 						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Setting Kehadiran</legend>
 						<div class="control-group">
 							<label class="control-label" for="title">Max Jam Masuk Kerja</label>
 							<div class="controls">
@@ -211,7 +217,9 @@ endif;
 							</div>
 							<p class="help-inline">Persentase Perhitungan Tukin dari kehadiran</p>
 						</div>
-
+					</fieldset>
+					<fieldset>
+						<legend>Setting Service Simpeg</legend>
 						<div class="control-group">
 							<label class="control-label" for="list_limit">User Simpeg</label>
 							<div class="controls">
@@ -228,6 +236,47 @@ endif;
 							<label class="control-label" for="list_limit">Token</label>
 							<div class="controls">
 								<input type="text" name="tokensimpeg" id="tokensimpeg" value="<?php echo set_value('tokensimpeg', isset($settings['site.tokensimpeg']) ? $settings['site.tokensimpeg'] : '')  ?>" class="span6" />
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Setting SAS</legend>
+						<div class="control-group">
+							<label class="control-label" for="list_limit">Host</label>
+							<div class="controls">
+								<input type="text" name="sashost" id="sashost" value="<?php echo set_value('sashost', isset($settings['site.sashost']) ? $settings['site.sashost'] : '')  ?>" class="span6" />
+								<p class="help-inline">Host/IP komputer SAS</p>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="list_limit">Username</label>
+							<div class="controls">
+								<input type="text" name="sasusername" id="sasusername" value="<?php echo set_value('sasusername', isset($settings['site.sasusername']) ? $settings['site.sasusername'] : '')  ?>" class="span6" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="list_limit">Password</label>
+							<div class="controls">
+								<input type="text" name="saspassword" id="saspassword" value="<?php echo set_value('saspassword', isset($settings['site.saspassword']) ? $settings['site.saspassword'] : '')  ?>" class="span6" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="list_limit">Nama Database</label>
+							<div class="controls">
+								<input type="text" name="sasdatabase" id="sasdatabase" value="<?php echo set_value('sasdatabase', isset($settings['site.sasdatabase']) ? $settings['site.sasdatabase'] : '')  ?>" class="span6" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="list_limit">Port</label>
+							<div class="controls">
+								<input type="text" name="sasport" id="sasport" value="<?php echo set_value('sasport', isset($settings['site.sasport']) ? $settings['site.sasport'] : '')  ?>" class="span6" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="title">Kode Satker</label>
+							<div class="controls">
+								<input type="text" name="kodesatker" id="kodesatker"  class="span2" value="<?php echo set_value('site.kodesatker', isset($settings['site.kodesatker']) ? $settings['site.kodesatker'] : '') ?>" />
+								<p class="help-inline">Isi dengan kode satker yang ada di aplikasi SAS (ex : 450052)</p>
 							</div>
 						</div>
 					</fieldset>

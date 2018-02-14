@@ -292,6 +292,7 @@ class kepegawaian extends Admin_Controller
 	{
 		$this->auth->restrict('Pegawai.Kepegawaian.Create');
 		$this->load->model('pegawai/pegawai_model', null, true);
+		$this->load->model('users/user_model');
 		$this->load->library('apiservicebosdm');
 		$usersimpeg = $this->settings_lib->item('site.usersimpeg');
 		$passsimpeg = $this->settings_lib->item('site.passsimpeg');
@@ -309,33 +310,75 @@ class kepegawaian extends Admin_Controller
 		} 
 		foreach ($datadecode->data as $record) {
 			//echo $record->sex."<br>";
+			$insert_id = "";
 			if($this->pegawai_model->isuniq($record->nip)){
 				$datapegawai = $this->pegawai_model->find_by("nip",$record->nip);
 				$id_pegawai = $datapegawai->id;
-					$data = array();
-					//$data['nip']        				= isset($record->nip) ? $record->nip : "";
-					//$data['no_absen']        			= isset($record->nip) ? $record->nip : "";
-					//$data['nama']        				= isset($record->name) ? $record->name : "";
-					$data['jabatan']        			= isset($record->jabatan_struktural_text) ? $record->jabatan_struktural_text : "";
-					$data['jabatan_ft']        			= isset($record->jabatan_ft_text) ? $record->jabatan_ft_text : "";
-					$data['jabatan_fu']        			= isset($record->jabatan_fu_text) ? $record->jabatan_fu_text : "";
-					$data['golongan']       			= isset($record->pangkat_id) ? $record->pangkat_id : "";
-					//$data['nomor_rekening'] 			= isset($record->nomor_rekening) ? $record->nomor_rekening : "";
-					$data['grade']        				= isset($record->jabatan_struktural_grade) ? $record->jabatan_struktural_grade : "";
-					$data['grade_ft']        				= isset($record->jabatan_ft_grade) ? $record->jabatan_ft_grade : "";
-					$data['grade_fu']        				= isset($record->jabatan_fu_grade) ? $record->jabatan_fu_grade : "";
-					$data['nip_atasan_langsung']      	= isset($record->al_nip) ? $record->al_nip : "";
-					$data['email_atasan_langsung']    	= isset($record->al_email) ? $record->al_email : "";
-					$result = $this->pegawai_model->update($id_pegawai,$data);
-					if($result){
-						$updated++;
-					}else{
-						$gagal++;
-					}
+				
+				$nip = isset($record->nip) ? $record->nip : "";
+				$nama = isset($record->name) ? $record->name : "";
+				// save user
+				$recusers = $this->user_model->find_by("nip",$nip);
+				if(!isset($recusers->id)){
+					$datauser =  array();
+					$datauser['timezone'] 		= "UTC";
+					$datauser['password'] 		= "123456789"; 
+					$datauser['active'] 		= 1; 
+					$datauser['nip'] 			= $nip;
+					$datauser['display_name'] 	= $nama;
+					$datauser['username'] 		= $nip;
+					$datauser['email']			= $nama."@gmail.com";
+					$datauser['role_id'] 		= "4";
+					$datauser['active'] 		= 1;
+					$insert_id = $this->user_model->insert($datauser);
+				}
+
+				$data = array();
+				//$data['nip']        				= isset($record->nip) ? $record->nip : "";
+				if($insert_id != "")
+					$data['no_absen']        			= $insert_id;
+				
+				//$data['nama']        				= isset($record->name) ? $record->name : "";
+				$data['jabatan']        			= isset($record->jabatan_struktural_text) ? $record->jabatan_struktural_text : "";
+				$data['jabatan_ft']        			= isset($record->jabatan_ft_text) ? $record->jabatan_ft_text : "";
+				$data['jabatan_fu']        			= isset($record->jabatan_fu_text) ? $record->jabatan_fu_text : "";
+				$data['golongan']       			= isset($record->pangkat_id) ? $record->pangkat_id : "";
+				//$data['nomor_rekening'] 			= isset($record->nomor_rekening) ? $record->nomor_rekening : "";
+				$data['grade']        				= isset($record->jabatan_struktural_grade) ? $record->jabatan_struktural_grade : "";
+				$data['grade_ft']        			= isset($record->jabatan_ft_grade) ? $record->jabatan_ft_grade : "";
+				$data['grade_fu']        			= isset($record->jabatan_fu_grade) ? $record->jabatan_fu_grade : "";
+				$data['nip_atasan_langsung']      	= isset($record->al_nip) ? $record->al_nip : "";
+				$data['email_atasan_langsung']    	= isset($record->al_email) ? $record->al_email : "";
+				$result = $this->pegawai_model->update($id_pegawai,$data);
+				if($result){
+					$updated++;
+				}else{
+					$gagal++;
+				}
 			}else{
+				$nip = isset($record->nip) ? $record->nip : "";
+				$nama = isset($record->name) ? $record->name : "";
+				// save user
+				$recusers = $this->user_model->find_by("nip",$nip);
+				if(!isset($recusers->id)){
+					$datauser =  array();
+					$datauser['timezone'] 		= "UTC";
+					$datauser['password'] 		= "123456789"; 
+					$datauser['active'] 		= 1; 
+					$datauser['nip'] 			= $nip;
+					$datauser['display_name'] 	= $nama;
+					$datauser['username'] 		= $nip;
+					$datauser['email']			= $nama."@gmail.com";
+					$datauser['role_id'] 		= "4";
+					$datauser['active'] 		= 1;
+					$insert_id = $this->user_model->insert($datauser);
+				}
+
 			  	$data = array();
 				$data['nip']        				= isset($record->nip) ? $record->nip : "";
-				$data['no_absen']        			= isset($record->nip) ? $record->nip : "";
+				if($insert_id != "")
+					$data['no_absen']        			= $insert_id;
+
 				$data['nama']        				= isset($record->name) ? $record->name : "";
 				$data['jabatan']        			= isset($record->jabatan_struktural_text) ? $record->jabatan_struktural_text : "";
 				$data['jabatan_ft']        			= isset($record->jabatan_ft_text) ? $record->jabatan_ft_text : "";
@@ -360,6 +403,48 @@ class kepegawaian extends Admin_Controller
 		exit();
 	}
 	//--------------------------------------------------------------------
+	private function save_user($type='insert', $id=0, $meta_fields=array(), $cur_role_name = '')
+	{
+        
+        $extra_unique_rule = '';
+		$username_required = '';
 
+        if ($type != 'insert') {
+			$_POST['id'] = $id;
+    		$extra_unique_rule = ',users.id';
+		}
+  
+		 
+
+		// Compile our core user elements to save.
+		$data =  array();
+        $data['timezone'] 		= "UTC";
+        $data['password'] 		= "123456789"; 
+		$data['active'] 		= 1; 
+		$nim 					= $this->input->post('mastermahasiswa_nim_mhs');
+		$data['nim'] 			= $nim;
+		$data['display_name'] 	= $this->input->post('mastermahasiswa_nama_mahasiswa');
+		$data['username'] 		= $nim;
+		$data['email']			= $nim."@gmail.com";
+		$data['role_id'] 		= "7";
+		if ($type == 'insert') {
+			$activation_method = $this->settings_lib->item('auth.user_activation_method');
+			
+			// No activation method
+			if ($activation_method == 0) {
+				// Activate the user automatically
+				$data['active'] = 1;
+			}
+
+			$return = $this->user_model->insert($data);
+			
+			$id = $return;
+		} else {	// Update
+			$return = $this->user_model->update($id, $data);
+		}
+		
+		return $return;
+
+	}//end save_user()
 
 }

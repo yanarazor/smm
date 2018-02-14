@@ -105,7 +105,7 @@ class kepegawaian extends Admin_Controller
 		// die($this->current_user->nip." ini");
 		$bulan = $this->input->get('bulan');
 		$keyword = $this->input->get('keyword');
-		$tahun = $this->input->get('tahun');
+		$tahun = $this->input->get('tahun') != "" ? $this->input->get('tahun') : date("Y");
 		$this->load->library('pagination');
 		if($this->current_user->role_id != "1" and $this->current_user->role_id != "16" and $this->current_user->role_id != "20")
 		{

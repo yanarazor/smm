@@ -36,7 +36,6 @@
 	  </div>
 
 <script type="text/javascript">	
-$(document).ready(function() {
 	 $("#frminput").submit( function() {
 	 	 
 		$('#kontent').html("<center>Generating data...</center>");
@@ -81,5 +80,4 @@ $(document).ready(function() {
 		  });        
 		return false;
 	}); 
-});
 </script>

@@ -86,11 +86,35 @@ class Sas_model extends BF_Model {
 	);
 	protected $insert_validation_rules 	= array();
 	protected $skip_validation 			= true;
-	
+	public $configsas;
 	//--------------------------------------------------------------------
 	function __construct()
     {
-		 $this->db2 = $this->load->database('sas_db', TRUE);
+		
+		$this->configsas = $db['sas_db'] = array(
+		      'hostname' => $this->settings_lib->item('site.sashost'),
+		      'username' => $this->settings_lib->item('site.sasusername'),
+		      'password' => $this->settings_lib->item('site.saspassword'),
+		      'database' => $this->settings_lib->item('site.sasdatabase'),
+		      'port' 	=> $this->settings_lib->item('site.sasport'),
+		      'dbdriver' => 'mysqli',
+		      'dbprefix' => '',
+		      'pconnect' => FALSE,
+		      'db_debug' => (ENVIRONMENT !== 'production'),
+		      'cache_on' => FALSE,
+		      'cachedir' => '',
+		      'char_set' => 'utf8',
+		      'dbcollat' => 'utf8_general_ci',
+		      'swap_pre' => '',
+		      'encrypt' => FALSE,
+		      'compress' => FALSE,
+		      'stricton' => FALSE,
+		      'failover' => array(),
+		      'save_queries' => TRUE);
+
+		$this->db2 = $this->load->database($this->configsas, TRUE);
+		//$this->db2 = $this->load->database('sas_db', TRUE);
+
 		 
     }//end __construct
 	public function get_dataitem($akun = "",$tahun = "")

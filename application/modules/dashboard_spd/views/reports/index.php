@@ -7,12 +7,23 @@
 ?>
 		<div class="alert alert-block alert-warning fade in ">
 		 Filter data
-		<select name="fillanggaran" id="fillanggaran" class="pull-right col-sm-2" style="background-color: #3c8dbc;">
+		<select name="fillanggaran" id="fillanggaran" class="pull-right col-sm-2">
 			<option value="">-- Pilih --</option>
 			<option value="Tematik" <?php echo $anggaran == "Tematik" ? "selected" : ""; ?>>Tematik</option>
 			<option value="PNBP" <?php echo $anggaran == "PNBP" ? "selected" : ""; ?>>PNBP</option>
 			<option value="Rutin" <?php echo $anggaran == "Rutin" ? "selected" : ""; ?>>Rutin</option>
 		</select>
+    <select name="filltahun" id="filltahun" class="pull-right col-sm-2">
+      <option value="">-- Pilih --</option>
+      <?php
+      for($i=2016;$i<=date("Y");$i++){
+        ?>
+        <option value="<?php echo $i; ?>" <?php echo $tahun == $i ? "selected" : ""; ?>><?php echo $i; ?></option>
+      <?php
+      }
+      ?>
+      
+    </select>
     <br>
 	  </div>
  
@@ -200,8 +211,16 @@
 <script type="text/javascript">	  
 $("#fillanggaran").change(function() {
 	var varanggaran = $("#fillanggaran" ).val();
-	var json_url = "<?php echo base_url() ?>admin/reports/dashboard_spd/?anggaran="+varanggaran;
+  var vartahun = $("#filltahun" ).val();
+  var json_url = "<?php echo base_url() ?>admin/reports/dashboard_spd/?anggaran="+varanggaran+"&tahun="+vartahun;
 	window.location.href = json_url;
 	 
+});
+$("#filltahun").change(function() {
+  var varanggaran = $("#fillanggaran" ).val();
+  var vartahun = $("#filltahun" ).val();
+  var json_url = "<?php echo base_url() ?>admin/reports/dashboard_spd/?anggaran="+varanggaran+"&tahun="+vartahun;
+  window.location.href = json_url;
+   
 });
 </script>

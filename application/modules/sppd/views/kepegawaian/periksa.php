@@ -263,7 +263,7 @@ $id = isset($sppd['id']) ? $sppd['id'] : '';
 					<legend> Laporan SPJ </legend>
 						<table border="0">
 							<tr>
-								<td>
+								<td width="150px">
 									Transport
 								</td>
 								<td>
@@ -383,7 +383,7 @@ $id = isset($sppd['id']) ? $sppd['id'] : '';
 					<legend> Pengeluaran Riil </legend>
 						<table border="0">
 							<tr>
-								<td>
+								<td width="150px">
 									Transport
 								</td>
 								<td>
@@ -429,10 +429,9 @@ $id = isset($sppd['id']) ? $sppd['id'] : '';
 									Checklist Jika Laporan SPJ sudah selesai
 								</td>
 								<td>
+									
 									<input type="checkbox" id="status_pj" value="1" <?php echo $sppd['status_pj'] == "1" ? "checked" : "" ?> name="status_pj"> 
-									<label for="status_spj">
-										
-									</label>
+									
 									
 								</td>
 								<td>

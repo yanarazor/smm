@@ -110,7 +110,7 @@
           <!-- MAP & BOX PANE -->
           <div class="box box-success">
          <div class="box-header">
-				<h2><i class="icon-list"></i><span class="break"></span>Realisasi Perbulan (Source: SAS)</h2>
+				<h2><i class="icon-list"></i><span class="break"></span>Realisasi Perbulan (Sumber: SAS)</h2>
 			</div>
             <!-- /.box-header -->
             <div class="box-content" id="container" style="height:450px">

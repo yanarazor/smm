@@ -166,8 +166,8 @@ class Sppd_jabodetabek_model extends BF_Model {
 		$this->db->join('pejabat_pemberi_perintah', 'sppd_jabodetabek.pejabat = pejabat_pemberi_perintah.id', 'left'); 
 		$this->db->join('kegiatan', 'sppd_jabodetabek.no_keg = kegiatan.kode', 'left'); 
 		$this->db->join('sppd_pengikut', 'sppd_jabodetabek.id = sppd_pengikut.kode_sppd', 'left');
-		$this->db->join('sppd_pengikut s', 'sppd_jabodetabek.id = s.kode_sppd', 'left');
-		$this->db->join('pegawai u', 's.id_user = u.no_absen', 'left');
+		//$this->db->join('sppd_pengikut s', 'sppd_jabodetabek.id = s.kode_sppd', 'left');
+		$this->db->join('pegawai u', 'sppd_pengikut.id_user = u.no_absen', 'left');
 		$this->db->group_by('pegawai.nama,sppd_jabodetabek.id');
 		$this->db->order_by('tanggal_berangkat',"Desc");
 		return parent::find_all();

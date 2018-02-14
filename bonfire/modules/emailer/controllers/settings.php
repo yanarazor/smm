@@ -75,7 +75,7 @@ class Settings extends Admin_Controller
 			{
 				$this->form_validation->set_rules('smtp_host', 'lang:em_smtp_address', 'required|trim');
 				$this->form_validation->set_rules('smtp_user', 'lang:em_smtp_username', 'trim');
-				$this->form_validation->set_rules('smtp_pass', 'lang:em_smtp_password', 'trim|matches_pattern[[A-Za-z0-9!@#\%$^&+=]{2,20}]');
+				//$this->form_validation->set_rules('smtp_pass', 'lang:em_smtp_password', 'trim|matches_pattern[[A-Za-z0-9!@#\%$^&+=]{2,20}]');
 				$this->form_validation->set_rules('smtp_port', 'lang:em_smtp_port', 'trim|numeric');
 				$this->form_validation->set_rules('smtp_timeout', 'lang:em_smtp_timeout', 'trim|numeric');
 			}

@@ -37,7 +37,7 @@ class Admin_Controller extends Authenticated_Controller
 
         // Pagination config
         $this->pager = array(
-            'full_tag_open'     => '<div class="pagination pagination-right"><ul>',
+            'full_tag_open'     => '<div class="pagination pagination-centered"><ul>',
             'full_tag_close'    => '</ul></div>',
             'next_link'         => '&rarr;',
             'prev_link'         => '&larr;',

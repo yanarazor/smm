@@ -7,7 +7,6 @@ $has_records	= isset($records) && is_array($records) && count($records);
 
 ?>
 <div class="admin-box">
-	<h3>Pegawai</h3>
 	<form action="<?php $this->uri->uri_string() ?>" method="get" accept-charset="utf-8">
 	 <table>
         	<tr> 

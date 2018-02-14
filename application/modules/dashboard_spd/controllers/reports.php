@@ -36,10 +36,12 @@ class reports extends Admin_Controller
 	 */
 	public function index()
 	{
-		$tahun = "2017";//date("Y");
+
 		$this->auth->restrict('Dashboard_SPD.Reports.View');
 		$anggaran = $this->input->get('anggaran');
+		$tahun = $this->input->get('tahun') != "" ? $this->input->get('tahun') : date("Y");
 		Template::set('anggaran', $anggaran);
+		Template::set('tahun', $tahun);
 		$this->load->model('sppd/propinsi_model', null, true);
 		$this->load->model('sppd/sppd_model', null, true);
 		$this->load->model('e_realisasi/sasd_item_model', null, true);
