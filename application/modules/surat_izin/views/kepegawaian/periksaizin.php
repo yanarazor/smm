@@ -88,8 +88,17 @@ $id = isset($surat_izin['id']) ? $surat_izin['id'] : '';
 					 <div class='controls'>
 						 <?php echo form_textarea( array( 'name' => 'surat_izin_catatan', 'id' => 'surat_izin_catatan', 'rows' => '5', 'cols' => '80', 'value' => set_value('surat_izin_catatan', isset($surat_izin['catatan']) ? $surat_izin['catatan'] : '') ) ); ?>
 						 <span class='help-inline'><?php echo form_error('surat_izin_catatan'); ?></span>
+
+				</div>
+				  <div class="control-group <?php echo form_error('lampiran') ? 'error' : ''; ?>">
+					 <?php echo form_label('Lampiran', 'lampiran', array('class' => 'control-label') ); ?>
+					 	<div class='controls'>
+						 <a href="<?php echo base_url().$this->settings_lib->item('site.urluploaded'); ?><?php echo $surat_izin['lampiran']; ?>" target="_blank" class="fancy"><?php echo $surat_izin['lampiran']; ?></a>
+						</div>
 					 </div>
 				 </div>
+				</div>
+				
 			<!--
 				<div class="control-group <?php echo form_error('tanggal_dibuat') ? 'error' : ''; ?>">
 					<?php echo form_label('Tanggal Dibuat', 'surat_izin_tanggal_dibuat', array('class' => 'control-label') ); ?>
@@ -99,6 +108,7 @@ $id = isset($surat_izin['id']) ? $surat_izin['id'] : '';
 					</div>
 				</div>
 			-->
+
 		 
 			<div class="form-actions">
 				<input type="submit" name="save" class="btn btn-primary" value="Save"  />

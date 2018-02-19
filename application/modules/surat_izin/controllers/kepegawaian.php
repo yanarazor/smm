@@ -278,6 +278,94 @@ class kepegawaian extends Admin_Controller
 		Template::set('toolbar_title', 'Daftar Surat Izin');
 		Template::render();
 	}
+	public function rekapsakit()
+	{
+		//die($this->current_user->atasan."masuk");
+		// Deleting anything?
+		Assets::add_css('fancybox/jquery.fancybox-1.3.4.css');
+		//Assets::add_css('flick/jquery-ui-1.8.13.custom.css');
+		Assets::add_js('fancybox/jquery.fancybox-1.3.4.js');
+
+		$idizin = $this->uri->segment(5);
+		 $modul = "";
+		if($idizin=="")
+			$idizin = "3";
+		
+		switch($idizin) {
+			case "3":
+			  $modul = "terlambat";
+			break;
+			case "2":
+			  $modul = "plgcepat";
+			  break;
+			case "1":
+			  $modul = "tidakmasuk";
+			  break;
+			case "4":
+			  $modul = "sakit";
+			break;
+			 
+		}	
+		
+		if (isset($_POST['delete']))
+		{
+			$checked = $this->input->post('checked');
+
+			if (is_array($checked) && count($checked))
+			{
+				$result = FALSE;
+				foreach ($checked as $pid)
+				{
+					$data_suratizin = $this->surat_izin_model->find($pid);
+					if($data_suratizin->status_atasan!="" and $data_suratizin->status_atasan!="0"){
+						Template::set_message("Data tidak bisa dihapus karena sudah melewati Proses Persetujuan", 'error');
+					}else{
+						$result = $this->surat_izin_model->delete($pid);
+					}
+				}
+
+				if ($result)
+				{
+					Template::set_message(count($checked) .' '. lang('surat_izin_delete_success'), 'success');
+				}
+				else
+				{
+					if($data_suratizin->status_atasan!="" and $data_suratizin->status_atasan!="0"){
+						Template::set_message("Data tidak bisa dihapus karena sudah melewati Proses Persetujuan", 'error');
+					}
+					else{
+						Template::set_message(lang('surat_izin_delete_failure') . $this->surat_izin_model->error, 'error');
+					}
+				}
+			}
+		}
+		$status = $this->input->get('status');
+		$keyword = $this->input->get('keyword');
+		$this->load->library('pagination');
+		if($this->current_user->role_id != "1" and $this->current_user->role_id != "16" and $this->current_user->role_id != "12")
+			$this->surat_izin_model->where('user',$this->current_user->id);
+		$total = $this->surat_izin_model->count_all($keyword,$idizin,$status);
+		$offset = $this->input->get('per_page');
+		$limit = $this->settings_lib->item('site.list_limit');
+
+		$this->pager['base_url'] 			= current_url()."?";
+		$this->pager['total_rows'] 			= $total;
+		$this->pager['per_page'] 			= $limit;
+		$this->pager['page_query_string']	= TRUE;
+		$this->pagination->initialize($this->pager);
+		if($this->current_user->role_id != "1" and $this->current_user->role_id != "16" and $this->current_user->role_id != "12")
+			$this->surat_izin_model->where('user',$this->current_user->id);
+		$records = $this->surat_izin_model->limit($limit, $offset)->find_all($keyword,$idizin,$status);
+		Template::set('total', $total); 
+		Template::set('modul', $modul); 
+		Template::set('idizin', $idizin);
+		Template::set('records', $records); 
+		Template::set('keyword', $keyword); 
+		Template::set('filter_type', "all"); 
+		Template::set('status', $status); 
+		Template::set('toolbar_title', 'Daftar Surat Izin');
+		Template::render();
+	}
 	public function resume()
 	{
 		$this->auth->restrict('Surat_Izin.Kepegawaian.Rekap');
@@ -874,6 +962,9 @@ class kepegawaian extends Admin_Controller
 	}
 	public function rekapvfizin()
 	{
+		Assets::add_css('fancybox/jquery.fancybox-1.3.4.css');
+		//Assets::add_css('flick/jquery-ui-1.8.13.custom.css');
+		Assets::add_js('fancybox/jquery.fancybox-1.3.4.js');
 		$idizin = $this->uri->segment(5);
 		 $modul = "";
 		if($idizin=="")
@@ -1406,7 +1497,6 @@ class kepegawaian extends Admin_Controller
 	}
 	public function sakit()
 	{
-		
 		$this->auth->restrict('Surat_Izin.Kepegawaian.Create');
 		$id = $this->uri->segment(5);
 		if (isset($_POST['save']))
@@ -1440,9 +1530,9 @@ class kepegawaian extends Admin_Controller
 				Template::set_message(lang('surat_izin_create_failure') . $this->surat_izin_model->error, 'error');
 			}
 		}
-		$id = $this->uri->segment(5);
-		Template::set('surat_izin', $this->surat_izin_model->find($id));
-		Assets::add_module_js('surat_izin', 'surat_izin.js');
+		//$id = $this->uri->segment(5);
+		//Template::set('surat_izin', $this->surat_izin_model->find($id));
+		//Assets::add_module_js('surat_izin', 'surat_izin.js');
 
 		Template::set('toolbar_title', lang('surat_izin_create') . ' Surat Izin Sakit');
 		Template::render();
@@ -1665,8 +1755,35 @@ class kepegawaian extends Admin_Controller
 			$return = $this->surat_izin_model->update($id,$dataupdate);
 		}
 		Template::set('surat_izin', $datadetil);
-		Template::set('toolbar_title', lang('surat_izin_edit') .' Surat Izin');
+		Template::set('toolbar_title','Periksa Surat Izin');
 		Template::render();
+	}
+	function saveberkas(){
+    	 $this->load->helper('handle_upload');
+		 $uploadData = array();
+		 $upload = true;
+		 $id_log = $this->input->post('id_log');
+		 $namafile = "";
+		 if (isset($_FILES['userfile']) && is_array($_FILES['userfile']) && $_FILES['userfile']['error'] != 4)
+		 {
+			$tmp_name = pathinfo($_FILES['userfile']['name'], PATHINFO_FILENAME);
+			$uploadData = handle_upload('userfile',$this->settings_lib->item('site.pathuploaded'));
+			 if (isset($uploadData['error']) && !empty($uploadData['error']))
+			 {
+			 	$tipefile=$_FILES['userfile']['type'];
+				 $upload = false;
+				 log_activity($this->auth->user_id(), 'Gagal : '.$uploadData['error'].$tipefile.$this->input->ip_address(), 'surat_izin');
+			 }else{
+			 	$namafile = $uploadData['data']['file_name'];
+                log_activity($this->auth->user_id(), 'Save surat dokter, ID : ' . $id_log . ' : ' . $this->input->ip_address(), 'daftar_ptpp');
+			 }
+		 }else{
+		 	die("File tidak ditemukan");
+		 	log_activity($this->auth->user_id(), 'File tidak ditemukan : ' . $this->input->ip_address(), 'surat_izin');
+		 } 	
+
+       echo '{"namafile":"'.$namafile.'"}';
+       exit();
 	}
 	//--------------------------------------------------------------------
 
@@ -1719,7 +1836,7 @@ class kepegawaian extends Admin_Controller
 		{
 			$data['user']        = $this->current_user->id;
 		}
-		
+		//die($this->input->post('surat_izin_lama'));
 		//$data['nip']       = $this->input->post('surat_izin_nip');
 		$data['izin']        = $izin;//$this->input->post('izin');
 		$data['lama']        = $this->input->post('surat_izin_lama');
@@ -1730,7 +1847,7 @@ class kepegawaian extends Admin_Controller
 		$data['atasan']        = $atasan;
 		$data['tanggal_selesai']        = $this->input->post('surat_izin_tanggal_selesai') ? $this->input->post('surat_izin_tanggal_selesai') : '0000-00-00';
 		$data['tanggal_dibuat']        = date("Y-m-d");//$this->input->post('surat_izin_tanggal_dibuat') ? $this->input->post('surat_izin_tanggal_dibuat') : '0000-00-00';
-
+		$data['lampiran']        = $this->input->post('lampiran');
 		if ($type == 'insert')
 		{
 			$id = $this->surat_izin_model->insert($data);

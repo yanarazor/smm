@@ -13,7 +13,7 @@ $has_records	= isset($records) && is_array($records) && count($records);
 		<li<?php echo $idizin == '3' ? ' class="active"' : ''; ?>><?php echo anchor(base_url()."index.php/admin/kepegawaian/surat_izin/rekap/3", "Terlambat Hadir"); ?></li>
 		<li<?php echo $idizin == '2' ? ' class="active"' : ''; ?>><?php echo anchor(base_url()."index.php/admin/kepegawaian/surat_izin/rekap/2", "Pulang Cepat"); ?></li>
 		<li<?php echo $idizin == '1' ? ' class="active"' : ''; ?>><?php echo anchor(base_url()."index.php/admin/kepegawaian/surat_izin/rekapizin/1", "Tidak Masuk"); ?></li>
-		<li<?php echo $idizin == '4' ? ' class="active"' : ''; ?>><?php echo anchor(base_url()."index.php/admin/kepegawaian/surat_izin/rekapizin/4", "Sakit"); ?></li>
+		<li<?php echo $idizin == '4' ? ' class="active"' : ''; ?>><?php echo anchor(base_url()."index.php/admin/kepegawaian/surat_izin/rekapsakit/4", "Sakit"); ?></li>
 		<li<?php echo $idizin == '20'? ' class="active"' : ''; ?>><?php echo anchor(base_url()."index.php/admin/kepegawaian/surat_izin/lupa_timer/", "Lupa Timer"); ?></li>
 		<li<?php echo $idizin == '21'? ' class="active"' : ''; ?>><?php echo anchor(base_url()."index.php/admin/kepegawaian/surat_izin/keluar/", "Keluar Kantor"); ?></li>
 		 

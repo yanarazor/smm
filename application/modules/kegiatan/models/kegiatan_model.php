@@ -75,7 +75,7 @@ class Kegiatan_model extends BF_Model {
 	{
 		if (empty($this->selects))
 		{
-			$this->select($this->table_name .'.*,u.display_name as penanggung_jawab');
+			$this->select($this->table_name .'.*,u.display_name as penanggung_jawab,us.display_name as nama_ppk');
 		}
 		 
 		if($judul!=""){
@@ -90,6 +90,7 @@ class Kegiatan_model extends BF_Model {
 			$this->db->where('tahun',$tahun);
 		}
 		$this->db->join('users u', 'kegiatan.pj = u.id', 'left'); 
+		$this->db->join('users us', 'kegiatan.ppk = us.id', 'left'); 
 		//$this->db->order_by("izin_keluar.id","DESC");
 		return parent::find_all();
 

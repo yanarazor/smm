@@ -1,6 +1,6 @@
 <?php
 
-$num_columns	= 6;
+$num_columns	= 7;
 $can_delete	= $this->auth->has_permission('Kegiatan.Masters.Delete');
 $can_edit		= $this->auth->has_permission('Kegiatan.Masters.Edit');
 $has_records	= isset($records) && is_array($records) && count($records);
@@ -51,12 +51,12 @@ $has_records	= isset($records) && is_array($records) && count($records);
 					<?php if ($can_delete && $has_records) : ?>
 					<th class="column-check"><input class="check-all" type="checkbox" /></th>
 					<?php endif;?>
-					
 					<th>Tahun</th>
 					<th>Dipa</th>
 					<th>Kode</th>
 					<th>Judul</th>
 					<th>PJ</th>
+					<th>PPK</th>
 				</tr>
 			</thead>
 			<?php if ($has_records) : ?>
@@ -90,6 +90,7 @@ $has_records	= isset($records) && is_array($records) && count($records);
 					<td><?php e($record->kode) ?></td>
 					<td><?php e($record->judul) ?></td>
 					<td><?php e($record->penanggung_jawab) ?></td>
+					<td><?php e($record->nama_ppk) ?></td>
 				</tr>
 				<?php
 					endforeach;

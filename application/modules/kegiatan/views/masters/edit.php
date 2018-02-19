@@ -69,6 +69,20 @@ $id = isset($kegiatan['id']) ? $kegiatan['id'] : '';
 					<span class='help-inline'><?php echo form_error('pj'); ?></span>
 				</div>
 			</div>
+			<div class="control-group <?php echo form_error('pj') ? 'error' : ''; ?>">
+				<?php echo form_label('PPK'. lang('bf_form_label_required'), 'pj', array('class' => 'control-label') ); ?>
+				<div class='controls'>
+					<select name="ppk" id="ppk" class="chosen-select-deselect" style="width:400px">
+						<option value="">-- Pilih  --</option>
+						<?php if (isset($users) && is_array($users) && count($users)):?>
+						<?php foreach($users as $rec):?>
+							<option value="<?php echo $rec->id?>" <?php if(isset($kegiatan['ppk']))  echo  ($rec->id==$kegiatan['ppk']) ? "selected" : ""; ?>> <?php e(ucfirst($rec->display_name)); ?></option>
+							<?php endforeach;?>
+						<?php endif;?>
+					</select>
+					<span class='help-inline'><?php echo form_error('ppk'); ?></span>
+				</div>
+			</div>
 			<div class="form-actions">
 				<input type="submit" name="save" class="btn btn-primary" value="<?php echo lang('kegiatan_action_edit'); ?>"  />
 				<?php echo lang('bf_or'); ?>

@@ -17,7 +17,6 @@ $has_records	= isset($records) && is_array($records) && count($records);
 		<li<?php echo $idizin == '4' ? ' class="active"' : ''; ?>><?php echo anchor(base_url()."index.php/admin/kepegawaian/surat_izin/rekapsakit/4", "Sakit"); ?></li>
 		<li<?php echo $idizin == '20'? ' class="active"' : ''; ?>><?php echo anchor(base_url()."index.php/admin/kepegawaian/surat_izin/lupa_timer/", "Lupa Timer"); ?></li>
 		<li<?php echo $idizin == '21'? ' class="active"' : ''; ?>><?php echo anchor(base_url()."index.php/admin/kepegawaian/surat_izin/keluar/", "Keluar Kantor"); ?></li>
-		
 	</ul> 
 	 <form action="<?php $this->uri->uri_string() ?>" method="get" accept-charset="utf-8">
 	 <table>
@@ -110,7 +109,24 @@ $has_records	= isset($records) && is_array($records) && count($records);
 					<td><?php e($record->hari) ?></td>
 					<td><?php e($convert->fmtDate($record->tanggal,"dd month yyyy")) ?></td>
 					<td><?php e($convert->fmtDate($record->tanggal_selesai,"dd month yyyy")) ?></td>
-					<td><?php e($record->alasan) ?></td>
+					<td>
+						<?php e($record->alasan) ?>
+						<?php 
+							$fotothum = "";
+							$fotoasli = "";
+							if(isset($record->lampiran)) :
+								$foto = $record->lampiran;
+								$fotothum = base_url()."assets/images/attach.gif";
+								$fotoasli = base_url().$this->settings_lib->item('site.urluploaded').$foto;
+								echo "<br>";
+								?>
+								<a href="<?php echo $fotoasli; ?>" target="_blank" class="fancybox">
+									<img alt="" src="<?php echo $fotothum; ?>">
+								</a>
+							<?php
+							endif;
+						?>
+					</td>
 					<td><?php e($record->catatan) ?></td> 
 					<td>
 						<?php 
@@ -137,3 +153,17 @@ $has_records	= isset($records) && is_array($records) && count($records);
 	<?php echo form_close(); ?>
 	 <?php echo $this->pagination->create_links(); ?>
 </div>
+<script type="text/javascript">	  
+$(document).ready(function(){
+	 $(".fancybox").fancybox({
+		'width'  : 1000,           // set the width
+		'height' : 800,           // set the height
+		'type'   : 'iframe',       // tell the script to create an iframe
+		'scrolling'   : 'no',
+		'overlayShow':true,
+		'hideOnContentClick':true,
+		'type':'iframe'
+})
+});
+	  
+</script>

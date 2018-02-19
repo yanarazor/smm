@@ -4,7 +4,7 @@ class Apiservicebosdm
 {
 		//var $user="196308031984121001";
 		//var $secretkey="elbaite921";
-		var $urlgetdatapegawai ="https://bosdm.lipi.go.id/api/index.php/hris/pegawai/list";
+		var $urlgetdatapegawai ="https://api.lipi.go.id/index.php/hris/pegawai/list";
 		//var $token = "0c4d00336d84eea83950c2e760c06118";
 		
 		var $CI;

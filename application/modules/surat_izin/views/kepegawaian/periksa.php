@@ -111,7 +111,7 @@ $id = isset($surat_izin['id']) ? $surat_izin['id'] : '';
 					</div>
 				</div>
 			-->
-		 
+		 	
 			<div class="form-actions">
 				<input type="submit" name="save" class="btn btn-primary" value="Save"  />
 				<?php echo lang('bf_or'); ?>

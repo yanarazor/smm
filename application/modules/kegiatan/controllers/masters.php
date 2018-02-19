@@ -212,6 +212,7 @@ class masters extends Admin_Controller
 		$data['kode']        = $this->input->post('kegiatan_kode');
 		$data['judul']        = $this->input->post('kegiatan_judul');
 		$data['pj']        = $this->input->post('pj');
+		$data['ppk']        = $this->input->post('ppk');
 		if ($type == 'insert')
 		{
 			$id = $this->kegiatan_model->insert($data);
